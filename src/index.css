@@ -1,3 +1,16 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer components {
+  .align-elements {
+    @apply max-w-4xl mx-auto px-5 w-full;
+  }
+}
+
+body {
+  body {
+    font-family: "Spartan", sans-serif;
+    size: 12px;
+  }
+}
