@@ -4,7 +4,7 @@ function FormInput({ name, type, placaholder, mainName, defaultValue }) {
   return (
     <div>
       <fieldset className="fieldset">
-        <legend className="fieldset-legend">{mainName}</legend>
+        <legend className="fieldset-legend py-2">{mainName}</legend>
         <input
           id={name}
           type={type}

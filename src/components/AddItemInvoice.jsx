@@ -4,11 +4,16 @@ import { objectCreater } from "../utils/objectCreator";
 import { MdOutlineDelete } from "react-icons/md";
 import { IoIosAddCircleOutline } from "react-icons/io";
 import { useRef, useState } from "react";
+import { validate } from "../utils/validate";
 
 function AddItemInvoice() {
   const drawerRef = useRef(null);
   const formRef = useRef(null);
   const [items, setItems] = useState([]);
+
+  const handleReload = () => {
+    window.location.reload();
+  };
 
   // discard button
   const handleDiscard = () => {
@@ -70,6 +75,16 @@ function AddItemInvoice() {
       items,
     });
 
+    const errors = validate(invoiceData);
+
+    if (!errors) {
+    } else {
+      const { message, target } = errors;
+      alert(message);
+      e.target[target]?.focus();
+      return;
+    }
+
     try {
       const response = await fetch("http://localhost:3000/data", {
         method: "POST",
@@ -84,6 +99,8 @@ function AddItemInvoice() {
       }
 
       const result = await response.json();
+      drawerRef.current.checked = false;
+      handleReload();
     } catch (error) {
       console.error("ERROR");
     }
