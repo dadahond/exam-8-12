@@ -66,11 +66,13 @@ function AboutHeader() {
         <span className="text-steelBlue">Status</span>
         <StatusBadge status={data?.status} />
       </div>
-      <div className="flex items-center gap-3">
-        <EditDrawer />
+      <div className="flex items-center jus ">
+        <div className="hidden lg:block">
+          <EditDrawer />
+        </div>
         <button
           onClick={() => setIsModalOpen(true)}
-          className="bg-coralRed hover:bg-softRed p-4 rounded-[50px] text-lightMist font-spartanBold font-bold "
+          className="bg-coralRed hover:bg-softRed hidden lg:block p-4 rounded-[50px] text-lightMist font-spartanBold font-bold "
         >
           Delete
         </button>

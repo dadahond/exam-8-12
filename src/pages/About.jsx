@@ -10,18 +10,17 @@ function About() {
   const [data, setData] = useState(null);
   const { id } = useParams();
 
-useEffect(()=>{
-    setLoading(true)
-    getOneData(id).then((res)=>{
-      setData(res)
-    }).catch(()=>{
-
-    }).finally(()=>{
-      setLoading(false)
-    })
-  },[])
-
-
+  useEffect(() => {
+    setLoading(true);
+    getOneData(id)
+      .then((res) => {
+        setData(res);
+      })
+      .catch(() => {})
+      .finally(() => {
+        setLoading(false);
+      });
+  }, []);
 
   if (loading) {
     return <div>Loading...</div>;
@@ -38,12 +37,12 @@ useEffect(()=>{
       </Link>
       <AboutHeader />
       <div className="align-elements">
-        <div className="flex justify-between items-center mb-8">
+        <div className="flex flex-col gap-5 lg:flex lg:flex-row lg:items-center items-start justify-between mb-8">
           <div className="flex flex-col">
             <span className="text-lg font-bold">{data.id}</span>
             <p className="text-mutedBlue">{data.description}</p>
           </div>
-          <div className="flex flex-col text-right text-mutedBlue ">
+          <div className="flex flex-col text-left lg:text-right text-mutedBlue ">
             <span>{data.senderAddress.street}</span>
             <span>{data.senderAddress.city}</span>
             <span>{data.senderAddress.postCode}}</span>
@@ -68,19 +67,21 @@ useEffect(()=>{
               {data.clientAddress.street} <br />
               {data.clientAddress.city}
               <br />
-              {data.clientAddress.postCode} <br />{" "}
-              {data.clientAddress.country}
+              {data.clientAddress.postCode} <br /> {data.clientAddress.country}
             </address>
           </div>
-          <div className="flex flex-col">
+          <div className="hidden lg:flex lg:flex-col">
             <span className="text-mutedBlue">Sent to</span>
-            <a
-              className="text-lg font-bold"
-              href={`mailto:{data.clientEmail}`}
-            >
+            <a className="text-lg font-bold" href={`mailto:{data.clientEmail}`}>
               {data.clientEmail}
             </a>
           </div>
+        </div>
+        <div className="lg:hidden">
+          <span className="text-mutedBlue">Sent to: </span>
+          <a className="text-lg font-bold" href={`mailto:{data.clientEmail}`}>
+            {data.clientEmail}
+          </a>
         </div>
         <div className="bg-lightMist dark:bg-darkSlate p-6 rounded-t-2xl shadow-md">
           <div className="grid grid-cols-4 text-mutedBlue font-medium text-sm pb-4 ">
